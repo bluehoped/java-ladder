@@ -13,11 +13,15 @@ public class Line {
 
     private void setLadderLine(int personOfCount) {
         oneLayerLadder.add(LineConnection.connectFirstLadder());
-        IntStream.range(1, personOfCount - 1).forEach(i -> oneLayerLadder.add(LineConnection.connectLadder(oneLayerLadder.get(i - 1).isConnect())));
+        IntStream.range(1, personOfCount - 1).forEach(i -> oneLayerLadder.add(LineConnection.connectLadder(getConnectionStateByLastElement())));
         oneLayerLadder.add(LineConnection.connectLastLadder());
     }
 
     public List<LineConnection> getOneLayerLadder() {
         return this.oneLayerLadder;
+    }
+
+    private boolean getConnectionStateByLastElement() {
+        return oneLayerLadder.get(oneLayerLadder.size() - 1).isConnect();
     }
 }
